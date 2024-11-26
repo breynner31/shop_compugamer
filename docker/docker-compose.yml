@@ -1,0 +1,60 @@
+services:
+  app:
+    image: compugamer_app
+    container_name: compugamer_app
+    restart: always
+    ports:
+      - "5003:5003"
+    environment:
+      - PASSWORD=3XM5gj7U1/97P=£
+      - DATABASE=db_compugamer
+      - DB_HOST=db
+      - USER=root
+    networks:
+      - server
+    
+
+  frontend:
+    image: compugamer_frontend
+    container_name: compugamer_frontend
+    restart: always
+    depends_on:
+      - app
+    networks:
+      - server
+    
+
+  nginx:
+    image: nginx:alpine
+    container_name: compugamer_nginx
+    restart: always
+    depends_on:
+      - frontend
+    volumes:
+      - ../src/nginx/vhost/nginx.conf:/etc/nginx/vhost/nginx.conf
+
+    networks:
+      - server
+    ports:
+      - "80:80"
+    
+
+  db:
+    image: mysql:8.0
+    container_name: compugamer_db
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 3XM5gj7U1/97P=£
+      MYSQL_DATABASE: db_compugamer
+    volumes:
+      - ./persistent-data/db_data:/var/lib/mysql
+      - ./db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - server
+
+
+networks:
+  server:
+    driver: bridge
