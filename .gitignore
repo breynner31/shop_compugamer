@@ -1,1 +1,49 @@
 docker/persistent-data/db_data/
+# Node modules y dependencias
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Archivos de Angular generados automáticamente
+dist/
+.angular/
+build/
+
+# IDEs y editores
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs y depuración
+*.log
+*.gz
+*.tgz
+
+# Archivos temporales
+tmp/
+temp/
+*.tmp
+*.temp
+
+# Configuración de Angular
+src/environments/environment.prod.ts
+src/environments/environment.ts
+
+# Configuración específica de usuarios
+*.local
+*.env
+
+# Ignorar solo el package-lock.json de la raíz
+/package-lock.json
+
+# Permitir el package-lock.json dentro de subcarpetas
+!src/frontend/package-lock.json
